@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>凱成機械製造 会社案内</title>
 <style>
   :root {
@@ -22,24 +23,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 20px 10px;
     font-family: 'Helvetica Neue', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
     gap: 0;
+    min-height: 100vh;
   }
 
-  /* A4 竖版: 210mm × 297mm */
+  /* ============================================================
+     BROCHURE — 2×3 TRIFOLD GRID
+     Width: 3 equal columns = 100vw (max 297mm)
+     Height: 2 rows of equal height (max 210mm)
+     On mobile: scale to fit viewport width
+     ============================================================ */
+
+  .brochure-wrapper {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 297 / 210;
+    display: block;
+  }
+
   .brochure {
-    width: 297mm;
-    height: 210mm;
+    width: 100%;
+    height: 100%;
     display: grid;
-    grid-template-columns: 100mm 97mm 100mm;
-    grid-template-rows: 105mm 105mm;
+    grid-template-columns: 34% 33% 33%;
+    grid-template-rows: 50% 50%;
     overflow: hidden;
     box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-    position: relative;
+    border-radius: 2px;
   }
 
-  /* 6个面板 */
   .panel {
     position: relative;
     overflow: hidden;
@@ -47,324 +61,336 @@
     flex-direction: column;
   }
 
-  /* 左列封面 */
+  /* ============================================================
+     PANEL 1 — COVER (left column, full height)
+     ============================================================ */
   .p-cover {
     background: var(--blue);
-    padding: 10px 12px;
+    padding: 8px 10px;
     justify-content: space-between;
+  }
+
+  .blue-topbar {
+    height: 3px;
+    background: var(--blue-light);
+    border-radius: 1px;
+    margin-bottom: 6px;
   }
 
   .p-cover-top {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
+    gap: 7px;
+    margin-bottom: 4px;
   }
 
   .logo-circle {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     background: var(--blue-light);
     border-radius: 50%;
     border: 2px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: var(--gold);
+    font-size: 12px;
     font-weight: 900;
+    color: var(--gold);
     flex-shrink: 0;
   }
 
-  .cover-title {
-    font-size: 11px;
-    font-weight: 900;
-    color: white;
-    line-height: 1.3;
+  .cover-titles {
+    flex: 1;
+    min-width: 0;
   }
 
   .cover-title-jp {
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 900;
     color: white;
     line-height: 1.2;
-    margin-bottom: 2px;
+    white-space: nowrap;
   }
 
   .cover-title-cn {
-    font-size: 9px;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 1px;
+    font-size: 7px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
   }
 
   .cover-divider {
     width: 100%;
     height: 2px;
     background: var(--red);
-    margin: 6px 0;
+    margin: 4px 0;
+    flex-shrink: 0;
   }
 
   .cover-label {
-    font-size: 8px;
+    font-size: 7px;
     color: var(--gold);
     letter-spacing: 2px;
-    margin-bottom: 4px;
-    font-weight: 600;
+    font-weight: 700;
+    margin-bottom: 5px;
+    flex-shrink: 0;
   }
 
   .cover-section-list {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    justify-content: center;
+    gap: 4px;
   }
 
   .cover-section-item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
 
   .cover-sec-num {
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 900;
     color: var(--gold);
-    width: 14px;
+    width: 16px;
+    flex-shrink: 0;
   }
 
   .cover-sec-title {
-    font-size: 9px;
-    color: rgba(255,255,255,0.7);
+    font-size: 8px;
+    color: rgba(255,255,255,0.75);
+    flex: 1;
   }
 
   .cover-sec-en {
-    font-size: 7px;
-    color: rgba(255,255,255,0.4);
-    margin-left: 20px;
+    font-size: 6px;
+    color: rgba(255,255,255,0.35);
   }
 
   .cover-footer {
-    border-top: 1px solid rgba(255,255,255,0.15);
-    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 5px;
     margin-top: 4px;
+    flex-shrink: 0;
   }
 
   .cover-footer-text {
-    font-size: 7px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 1px;
+    font-size: 6px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
   }
 
-  /* 中列上 - 会社概要 */
+  /* ============================================================
+     PANEL 2 — OVERVIEW (middle column, top row)
+     ============================================================ */
   .p-overview {
     background: var(--white);
-    border-left: 1px solid var(--light-gray);
-    border-right: 1px solid var(--light-gray);
-    padding: 8px 10px;
-    overflow: hidden;
+    border-left: 0.5px solid var(--light-gray);
+    border-right: 0.5px solid var(--light-gray);
+    padding: 7px 9px;
   }
 
   .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
+    flex-shrink: 0;
   }
 
-  .section-header-left {
-    display: flex;
-    flex-direction: column;
-  }
+  .section-header-left { flex: 1; min-width: 0; }
 
   .section-num {
-    font-size: 7px;
+    font-size: 6.5px;
     color: var(--gold);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-weight: 700;
     margin-bottom: 1px;
   }
 
   .section-title {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 900;
     color: var(--blue);
     line-height: 1.1;
   }
 
   .section-title-en {
-    font-size: 7px;
+    font-size: 6px;
     color: var(--gray);
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 
   .blue-bar {
     width: 3px;
-    height: 30px;
+    height: 26px;
     background: var(--blue);
     border-radius: 2px;
+    flex-shrink: 0;
   }
 
   .overview-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 4px;
-    margin-bottom: 7px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-bottom: 5px;
+    flex-shrink: 0;
   }
 
   .stat-item {
     text-align: center;
     background: var(--bg);
-    padding: 4px 3px;
-    border-radius: 3px;
+    padding: 3px 2px;
+    border-radius: 2px;
   }
 
   .stat-val {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 900;
     color: var(--blue);
     line-height: 1;
   }
 
   .stat-unit {
-    font-size: 8px;
+    font-size: 7px;
     color: var(--gray);
   }
 
   .stat-lbl {
-    font-size: 7px;
+    font-size: 6px;
     color: var(--gray);
     margin-top: 1px;
   }
 
   .overview-desc {
-    font-size: 7.5px;
+    font-size: 6.5px;
     color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 7px;
-    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    flex-shrink: 0;
   }
 
   .cert-row {
     display: flex;
-    gap: 5px;
     align-items: center;
+    gap: 5px;
     background: var(--blue);
-    padding: 5px 7px;
-    border-radius: 3px;
+    padding: 4px 6px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    flex-shrink: 0;
   }
 
   .cert-badge {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     background: rgba(200,146,42,0.2);
     border-radius: 50%;
     border: 1px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 9px;
     flex-shrink: 0;
   }
 
   .cert-text strong {
     display: block;
-    font-size: 8px;
+    font-size: 7px;
     color: white;
     font-weight: 700;
   }
 
   .cert-text span {
-    font-size: 7px;
+    font-size: 6px;
     color: rgba(255,255,255,0.6);
   }
 
   .overview-bottom {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    margin-top: 6px;
+    gap: 3px;
+    flex: 1;
+    min-height: 0;
   }
 
   .ob-img {
     width: 100%;
-    height: 32px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
-  /* 右列上 - 製品紹介 */
+  /* ============================================================
+     PANEL 3 — PRODUCTS (right column, top row)
+     ============================================================ */
   .p-products {
     background: var(--white);
-    padding: 8px 10px;
-    overflow: hidden;
+    padding: 7px 9px;
   }
 
   .products-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    gap: 5px;
-    margin-top: 6px;
+    gap: 3px;
+    margin-bottom: 4px;
+    flex-shrink: 0;
   }
 
   .prod-img {
     width: 100%;
-    height: 28px;
+    height: 24px;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   .prod-card {
     background: var(--bg);
-    border-radius: 3px;
+    border-radius: 2px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .prod-card-img {
     width: 100%;
-    height: 24px;
+    height: 20px;
     object-fit: cover;
+    flex-shrink: 0;
   }
 
   .prod-card-body {
-    padding: 3px 5px;
+    padding: 2px 4px;
   }
 
   .prod-card-name {
-    font-size: 7px;
+    font-size: 6.5px;
     font-weight: 700;
     color: var(--blue);
     margin-bottom: 1px;
   }
 
   .prod-card-desc {
-    font-size: 6px;
+    font-size: 5.5px;
     color: var(--gray);
-    line-height: 1.4;
+    line-height: 1.3;
   }
 
   .pie-section {
-    margin-top: 5px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .pie-title {
-    font-size: 7px;
+    font-size: 6px;
     font-weight: 700;
     color: var(--blue);
     margin-bottom: 3px;
-    letter-spacing: 1px;
-  }
-
-  .pie-chart {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .pie-visual {
-    width: 52px;
-    height: 52px;
-    position: relative;
+    letter-spacing: 0.5px;
     flex-shrink: 0;
   }
 
@@ -389,31 +415,34 @@
   }
 
   .legend-text {
-    font-size: 6.5px;
+    font-size: 6px;
     color: var(--gray);
+    flex: 1;
+    min-width: 0;
   }
 
   .legend-pct {
-    font-size: 6.5px;
+    font-size: 6px;
     color: var(--blue);
     font-weight: 700;
-    margin-left: auto;
+    flex-shrink: 0;
   }
 
-  /* 左下 - 生産プロセス */
+  /* ============================================================
+     PANEL 4 — PROCESS (left column, bottom row)
+     ============================================================ */
   .p-process {
     background: var(--white);
-    border-top: 1px solid var(--light-gray);
-    padding: 8px 10px;
-    overflow: hidden;
+    border-top: 0.5px solid var(--light-gray);
+    padding: 7px 9px;
   }
 
   .process-flow {
     display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
-    margin-top: 6px;
     align-items: center;
+    gap: 2px;
+    margin: 5px 0;
+    flex-shrink: 0;
   }
 
   .proc-step {
@@ -424,125 +453,106 @@
   }
 
   .proc-step-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: var(--blue);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .proc-step-label {
-    font-size: 5.5px;
+    font-size: 5px;
     color: var(--gray);
     text-align: center;
-    max-width: 28px;
-    line-height: 1.2;
+    max-width: 26px;
+    line-height: 1.1;
   }
 
   .proc-arrow {
-    font-size: 7px;
+    font-size: 6px;
     color: var(--red);
     font-weight: 700;
+    flex-shrink: 0;
   }
 
   .proc-imgs {
     display: flex;
-    gap: 4px;
-    margin-top: 6px;
+    gap: 3px;
+    flex: 1;
+    min-height: 0;
   }
 
   .proc-img {
     flex: 1;
-    height: 28px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 2px;
+    min-height: 26px;
   }
 
-  /* 右下 - 経営状況 */
+  .proc-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .chart-box {
+    background: var(--bg);
+    border-radius: 2px;
+    padding: 3px 4px;
+  }
+
+  .chart-title {
+    font-size: 6px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 2px;
+  }
+
+  .chart-box-content {
+    font-size: 6px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+     PANEL 5 — BUSINESS (middle column, bottom row)
+     ============================================================ */
   .p-business {
     background: var(--white);
-    border-left: 1px solid var(--light-gray);
-    border-top: 1px solid var(--light-gray);
-    padding: 8px 10px;
-    overflow: hidden;
+    border-left: 0.5px solid var(--light-gray);
+    border-right: 0.5px solid var(--light-gray);
+    border-top: 0.5px solid var(--light-gray);
+    padding: 7px 9px;
   }
 
   .biz-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px;
-    margin-top: 6px;
+    gap: 4px;
+    flex: 1;
+    min-height: 0;
   }
 
   .biz-left {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 3px;
   }
 
-  .chart-box {
+  .chart-box-full {
     background: var(--bg);
-    border-radius: 3px;
+    border-radius: 2px;
     padding: 4px 5px;
-  }
-
-  .chart-title {
-    font-size: 6.5px;
-    font-weight: 700;
-    color: var(--blue);
-    margin-bottom: 3px;
-  }
-
-  .bar-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 2px;
-    height: 24px;
-    padding-top: 2px;
-  }
-
-  .bar-col {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1px;
-  }
-
-  .bar {
-    width: 100%;
-    background: var(--blue);
-    border-radius: 1px 1px 0 0;
-  }
-
-  .bar-label {
-    font-size: 5px;
-    color: var(--gray);
-  }
-
-  .bar-accent { background: var(--red); }
-  .bar-gold { background: var(--gold); }
-
-  .biz-right {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .market-box {
-    background: var(--bg);
-    border-radius: 3px;
-    padding: 4px 5px;
-  }
-
-  .market-title {
-    font-size: 6.5px;
-    font-weight: 700;
-    color: var(--blue);
-    margin-bottom: 3px;
+    justify-content: center;
   }
 
   .market-row {
@@ -553,15 +563,15 @@
   }
 
   .market-lbl {
-    font-size: 6px;
+    font-size: 5.5px;
     color: var(--gray);
-    width: 22px;
+    width: 20px;
     flex-shrink: 0;
   }
 
   .market-track {
     flex: 1;
-    height: 7px;
+    height: 6px;
     background: var(--light-gray);
     border-radius: 3px;
     overflow: hidden;
@@ -577,24 +587,71 @@
   }
 
   .market-pct {
-    font-size: 5.5px;
+    font-size: 5px;
     color: white;
     font-weight: 700;
   }
 
-  .biz-team-img {
-    width: 100%;
-    height: 28px;
-    object-fit: cover;
-    border-radius: 3px;
-    margin-top: 4px;
+  .biz-right {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
   }
 
-  /* 封底 */
+  .biz-mini-box {
+    background: var(--bg);
+    border-radius: 2px;
+    padding: 3px 5px;
+  }
+
+  .biz-mini-title {
+    font-size: 6px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 2px;
+  }
+
+  .biz-mini-text {
+    font-size: 5.5px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .biz-team-img {
+    width: 100%;
+    flex: 1;
+    min-height: 26px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .biz-cta {
+    font-size: 6.5px;
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    background: var(--blue);
+    padding: 4px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  /* ============================================================
+     PANEL 6 — BACK COVER (right column, bottom row)
+     ============================================================ */
   .p-back {
     background: var(--blue);
-    padding: 8px 10px;
+    padding: 7px 9px;
     justify-content: space-between;
+    border-top: 0.5px solid var(--light-gray);
+  }
+
+  .back-topbar {
+    height: 3px;
+    background: var(--red);
+    border-radius: 1px;
+    margin-bottom: 6px;
+    flex-shrink: 0;
   }
 
   .back-title-jp {
@@ -605,24 +662,26 @@
   }
 
   .back-title-en {
-    font-size: 7px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+    font-size: 6.5px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
   }
 
   .back-divider {
     width: 100%;
     height: 1.5px;
     background: var(--red);
-    margin: 6px 0;
+    margin: 4px 0;
+    flex-shrink: 0;
   }
 
   .back-contact {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin-bottom: 6px;
+    gap: 3px;
+    margin-bottom: 5px;
+    flex: 1;
   }
 
   .back-contact-item {
@@ -640,59 +699,47 @@
   }
 
   .back-contact-text {
-    font-size: 7px;
+    font-size: 6.5px;
     color: rgba(255,255,255,0.75);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   .back-cta {
     background: var(--red);
     color: white;
-    font-size: 8px;
+    font-size: 7px;
     font-weight: 700;
     padding: 5px 8px;
-    border-radius: 3px;
+    border-radius: 2px;
     text-align: center;
     letter-spacing: 1px;
-    margin-top: auto;
+    flex-shrink: 0;
   }
 
   .back-footer {
-    font-size: 6px;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 1px;
+    font-size: 5.5px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.5px;
     margin-top: 4px;
   }
 
-  /* 红色强调装饰线 */
-  .red-accent-bar {
-    height: 3px;
-    background: var(--red);
-    width: 100%;
-    flex-shrink: 0;
-  }
-
-  /* 蓝色顶部条 */
-  .blue-topbar {
-    height: 4px;
-    background: var(--blue);
-    width: 100%;
-    flex-shrink: 0;
-  }
-
-  /* 打印规格 */
+  /* ============================================================
+     PRINT SPECS
+     ============================================================ */
   .print-specs {
-    width: 297mm;
+    width: 100%;
+    max-width: 800px;
     background: white;
-    padding: 30px;
-    margin-top: 40px;
+    padding: 24px;
+    margin-top: 30px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-radius: 4px;
   }
 
   .print-specs h2 {
     font-size: 14px;
     color: var(--blue);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--red);
   }
@@ -706,13 +753,13 @@
   .spec-table th {
     background: var(--blue);
     color: white;
-    padding: 8px 12px;
+    padding: 7px 10px;
     text-align: left;
     font-weight: 600;
   }
 
   .spec-table td {
-    padding: 8px 12px;
+    padding: 7px 10px;
     border-bottom: 1px solid var(--light-gray);
     color: #333;
     vertical-align: top;
@@ -721,7 +768,7 @@
   .spec-table tr:nth-child(even) td { background: var(--bg); }
 
   .spec-note {
-    margin-top: 14px;
+    margin-top: 12px;
     font-size: 10px;
     color: var(--gray);
     line-height: 1.8;
@@ -731,83 +778,59 @@
     border-radius: 0 4px 4px 0;
   }
 
+  @media (max-width: 600px) {
+    body { padding: 10px 5px; }
+    .brochure-wrapper { max-width: 100%; }
+  }
+
   @media print {
     body { background: white; padding: 0; }
     .brochure { box-shadow: none; }
     .print-specs { box-shadow: none; margin-top: 0; }
   }
-
-  @page {
-    size: 297mm 210mm;
-    margin: 0;
-  }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     PRINT SPECS
-     ============================================================ -->
-<div class="print-specs">
-  <h2>📋 印刷规格说明书 — 凱成機械製造 会社案内（三折页）</h2>
-  <table class="spec-table">
-    <thead><tr><th>项目</th><th>规格</th><th>备注</th></tr></thead>
-    <tbody>
-      <tr><td><strong>成品尺寸</strong></td><td>A4 竖版（210 × 297mm）</td><td>三折页：折叠后 99mm × 210mm</td></tr>
-      <tr><td><strong>展开总宽</strong></td><td>297mm</td><td>三等分，每格 99mm</td></tr>
-      <tr><td><strong>总高度</strong></td><td>210mm</td><td>上下两排，每格 105mm</td></tr>
-      <tr><td><strong>出血线</strong></td><td>每边各 3mm</td><td>印刷用尺寸 303mm × 216mm</td></tr>
-      <tr><td><strong>纸张</strong></td><td>157g/m² 铜版纸（单张整版）</td><td>覆哑膜，质感最佳</td></tr>
-      <tr><td><strong>印刷色</strong></td><td>CMYK 4色</td><td>Japan Color 2001 Coated</td></tr>
-      <tr><td><strong>折叠方式</strong></td><td>先竖三折，再横折（中→左→右）</td><td>建议印刷厂按此顺序折叠打样</td></tr>
-      <tr><td><strong>分辨率</strong></td><td>300 dpi</td><td>图片需原尺寸高清</td></tr>
-      <tr><td><strong>交付格式</strong></td><td>PDF/X-4（印刷版）</td><td>送印前务必转 PDF</td></tr>
-    </tbody>
-  </table>
-  <div class="spec-note">
-    <strong>⚠️ 注意：</strong>三折页折叠顺序影响阅读流畅度，建议先打样确认。折痕位置建议压在内容分区线（网格线）上，实际成品会更整洁美观。
-  </div>
-</div>
-
-<!-- ============================================================
-     BROCHURE — 2×3 TRIFOLD LAYOUT
-     ============================================================ -->
+<div class="brochure-wrapper">
 <div class="brochure">
 
-  <!-- ROW 1: COVER + OVERVIEW + PRODUCTS -->
-
-  <!-- [1] 左封面 -->
+  <!-- ============================================================
+       PANEL 1: LEFT COVER
+       ============================================================ -->
   <div class="panel p-cover">
-    <div class="blue-topbar"></div>
-    <div class="p-cover-top">
-      <div class="logo-circle">K</div>
-      <div>
-        <div class="cover-title-jp">凱成機械製造有限公司</div>
-        <div class="cover-title-cn">沈阳凯成（ガイセイ）機械製造</div>
+    <div>
+      <div class="blue-topbar"></div>
+      <div class="p-cover-top">
+        <div class="logo-circle">K</div>
+        <div class="cover-titles">
+          <div class="cover-title-jp">凱成機械製造有限公司</div>
+          <div class="cover-title-cn">沈阳凯成（ガイセイ）機械製造</div>
+        </div>
       </div>
-    </div>
-    <div class="cover-divider"></div>
-    <div class="cover-label">COMPANY PROFILE</div>
-    <div class="cover-section-list">
-      <div class="cover-section-item">
-        <span class="cover-sec-num">01</span>
-        <span class="cover-sec-title">会社概要</span>
-        <span class="cover-sec-en">Company Overview</span>
-      </div>
-      <div class="cover-section-item">
-        <span class="cover-sec-num">02</span>
-        <span class="cover-sec-title">製品紹介</span>
-        <span class="cover-sec-en">Products</span>
-      </div>
-      <div class="cover-section-item">
-        <span class="cover-sec-num">03</span>
-        <span class="cover-sec-title">生産プロセス</span>
-        <span class="cover-sec-en">Process & Equipment</span>
-      </div>
-      <div class="cover-section-item">
-        <span class="cover-sec-num">04</span>
-        <span class="cover-sec-title">経営状況</span>
-        <span class="cover-sec-en">Business Operations</span>
+      <div class="cover-divider"></div>
+      <div class="cover-label">COMPANY PROFILE</div>
+      <div class="cover-section-list">
+        <div class="cover-section-item">
+          <span class="cover-sec-num">01</span>
+          <span class="cover-sec-title">会社概要</span>
+          <span class="cover-sec-en">Overview</span>
+        </div>
+        <div class="cover-section-item">
+          <span class="cover-sec-num">02</span>
+          <span class="cover-sec-title">製品紹介</span>
+          <span class="cover-sec-en">Products</span>
+        </div>
+        <div class="cover-section-item">
+          <span class="cover-sec-num">03</span>
+          <span class="cover-sec-title">生産プロセス</span>
+          <span class="cover-sec-en">Process</span>
+        </div>
+        <div class="cover-section-item">
+          <span class="cover-sec-num">04</span>
+          <span class="cover-sec-title">経営状況</span>
+          <span class="cover-sec-en">Business</span>
+        </div>
       </div>
     </div>
     <div class="cover-footer">
@@ -815,7 +838,9 @@
     </div>
   </div>
 
-  <!-- [2] 中上 - 会社概要 -->
+  <!-- ============================================================
+       PANEL 2: OVERVIEW (middle top)
+       ============================================================ -->
   <div class="panel p-overview">
     <div class="section-header">
       <div class="section-header-left">
@@ -854,24 +879,26 @@
     </div>
 
     <div class="overview-desc">
-      当社は精密錆造と機械加工于一炉の総合メーカーです。S304、S316、CF8、CF8M、SKD11、S10C-45C、SCM21、高マンガン、高クロム鋼、耐熱鋼シリーズ等专业材を使用しています。
+      当社は精密錆造と機械加工于一炉の総合メーカーです。S304・S316・CF8・CF8M・SKD11・SCM21、高マンガン鋼、耐熱鋼等专业材を使用。
     </div>
 
     <div class="cert-row">
       <div class="cert-badge">🏆</div>
       <div class="cert-text">
         <strong>高新技術企業認定</strong>
-        <span>国家登録特許20件 · 研究開発スタッフ5名</span>
+        <span>国家登録特許20件 · 研究開発5名</span>
       </div>
     </div>
 
     <div class="overview-bottom">
-      <img src="kaicheng_images/img_04.png" class="ob-img" alt="">
-      <img src="kaicheng_images/img_07.png" class="ob-img" alt="">
+      <img src="kaicheng_images/img_04.png" class="ob-img" alt="設備">
+      <img src="kaicheng_images/img_07.png" class="ob-img" alt="認定">
     </div>
   </div>
 
-  <!-- [3] 右上 - 製品紹介 -->
+  <!-- ============================================================
+       PANEL 3: PRODUCTS (right top)
+       ============================================================ -->
   <div class="panel p-products">
     <div class="section-header">
       <div class="section-header-left">
@@ -883,66 +910,64 @@
     </div>
 
     <div class="products-layout">
-      <img src="kaicheng_images/img_01.jpg" class="prod-img" alt="产品">
-      <img src="kaicheng_images/img_03.jpg" class="prod-img" alt="产品">
+      <img src="kaicheng_images/img_01.jpg" class="prod-img" alt="泵阀">
+      <img src="kaicheng_images/img_03.jpg" class="prod-img" alt="机械">
       <div class="prod-card">
         <img src="kaicheng_images/img_05.jpg" class="prod-card-img" alt="食品機械">
         <div class="prod-card-body">
           <div class="prod-card-name">食品機械部品</div>
-          <div class="prod-card-desc">肉換機 GG-22 / MGB-32、テーブル薄切り機 HS-2N</div>
+          <div class="prod-card-desc">肉換機 GG-22 / MGB-32</div>
         </div>
       </div>
       <div class="prod-card">
         <img src="kaicheng_images/img_06.jpg" class="prod-card-img" alt="自動車">
         <div class="prod-card-body">
           <div class="prod-card-name">自動車部品</div>
-          <div class="prod-card-desc">Lexus / ヒュンダイ·カイア / 三菱シリーズ</div>
+          <div class="prod-card-desc">Lexus / ヒュンダイ / 三菱</div>
         </div>
       </div>
     </div>
 
     <div class="pie-section">
       <div class="pie-title">MAIN PRODUCTS COMPOSITION</div>
-      <div class="pie-chart">
-        <div class="pie-legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#c8102e;"></div>
-            <span class="legend-text">圧力容器用バルブボディ</span>
-            <span class="legend-pct">23%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#1a3a5c;"></div>
-            <span class="legend-text">建築部品</span>
-            <span class="legend-pct">19%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#2a5a8c;"></div>
-            <span class="legend-text">自動車部品</span>
-            <span class="legend-pct">18%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#6b7280;"></div>
-            <span class="legend-text">機械部品</span>
-            <span class="legend-pct">15%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#c8922a;"></div>
-            <span class="legend-text">食品機械</span>
-            <span class="legend-pct">11%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#aaa;"></div>
-            <span class="legend-text">その他</span>
-            <span class="legend-pct">14%</span>
-          </div>
+      <div class="pie-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#c8102e;"></div>
+          <span class="legend-text">圧力容器用バルブボディ</span>
+          <span class="legend-pct">23%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#1a3a5c;"></div>
+          <span class="legend-text">建築部品</span>
+          <span class="legend-pct">19%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#2a5a8c;"></div>
+          <span class="legend-text">自動車部品</span>
+          <span class="legend-pct">18%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#6b7280;"></div>
+          <span class="legend-text">機械部品</span>
+          <span class="legend-pct">15%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#c8922a;"></div>
+          <span class="legend-text">食品機械</span>
+          <span class="legend-pct">11%</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#aaa;"></div>
+          <span class="legend-text">その他</span>
+          <span class="legend-pct">14%</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ROW 2: PROCESS + BUSINESS + BACK -->
-
-  <!-- [4] 左下 - 生産プロセス -->
+  <!-- ============================================================
+       PANEL 4: PROCESS (left bottom)
+       ============================================================ -->
   <div class="panel p-process">
     <div class="section-header">
       <div class="section-header-left">
@@ -996,27 +1021,30 @@
     </div>
 
     <div class="proc-imgs">
-      <img src="kaicheng_images/img_02.jpg" class="proc-img" alt="工場">
-      <img src="kaicheng_images/img_08.png" class="proc-img" alt="設備" style="object-fit:contain; background:#f0eeea;">
+      <img src="kaicheng_images/img_02.jpg" class="proc-img" alt="工場全景">
+      <img src="kaicheng_images/img_08.png" class="proc-img" alt="工程図" style="object-fit:contain; background:#f0eeea;">
     </div>
 
-    <div style="margin-top: 5px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+    <div class="proc-info-grid">
       <div class="chart-box">
         <div class="chart-title">対応材質</div>
-        <div style="font-size: 6.5px; color: var(--gray); line-height: 1.7;">
-          SUS304 / SUS316 / CF8 / CF8M<br>
-          SKD11 / SCM440 / 高マンガン鋼
+        <div class="chart-box-content">
+          SUS304 / SUS316<br>
+          CF8 / CF8M<br>
+          SKD11 / SCM440
         </div>
       </div>
       <div class="chart-box">
         <div class="chart-title">年間产能</div>
-        <div style="font-size: 11px; font-weight: 900; color: var(--blue);">1,000<span style="font-size:8px; color: var(--gray);">トン</span></div>
-        <div style="font-size: 6.5px; color: var(--gray);">娃溶膠ライン</div>
+        <div style="font-size:12px; font-weight:900; color:var(--blue);">1,000<span style="font-size:7px; color:var(--gray);">トン/年</span></div>
+        <div class="chart-box-content">娃溶膠ライン</div>
       </div>
     </div>
   </div>
 
-  <!-- [5] 右下 - 経営状況 -->
+  <!-- ============================================================
+       PANEL 5: BUSINESS (middle bottom)
+       ============================================================ -->
   <div class="panel p-business">
     <div class="section-header">
       <div class="section-header-left">
@@ -1029,9 +1057,9 @@
 
     <div class="biz-layout">
       <div class="biz-left">
-        <div class="chart-box">
+        <div class="chart-box-full">
           <div class="chart-title"> MARKET DISTRIBUTION 市場分布</div>
-          <div style="display: flex; flex-direction: column; gap: 3px;">
+          <div style="display: flex; flex-direction: column; gap: 3px; margin-top: 3px;">
             <div class="market-row">
               <div class="market-lbl">アジア</div>
               <div class="market-track">
@@ -1058,88 +1086,91 @@
             </div>
           </div>
         </div>
-
-        <div class="chart-box">
-          <div class="chart-title">輸出市場 2010-2014</div>
-          <div class="bar-chart">
-            <div class="bar-col">
-              <div class="bar bar-accent" style="height:10px;"></div>
-              <div class="bar-label">2010</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar bar-accent" style="height:12px;"></div>
-              <div class="bar-label">2011</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar bar-accent" style="height:15px;"></div>
-              <div class="bar-label">2012</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar bar-gold" style="height:18px;"></div>
-              <div class="bar-label">2013</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar bar-gold" style="height:22px;"></div>
-              <div class="bar-label">2014</div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="biz-right">
-        <div class="market-box">
-          <div class="market-title">会社概要</div>
-          <div style="font-size: 7px; color: var(--gray); line-height: 1.7;">
-            原材料：S304、S316、CF8、CF8M、SKD11<br>
+        <div class="biz-mini-box">
+          <div class="biz-mini-title">会社概要</div>
+          <div class="biz-mini-text">
+            原材料：S304・S316・CF8・CF8M<br>
             製品数：4,000種類以上<br>
-            产品单重：5g〜200kg
+            单重：5g〜200kg
           </div>
         </div>
-        <div class="market-box">
-          <div class="market-title">主な取引先</div>
-          <div style="font-size: 7px; color: var(--gray); line-height: 1.7;">
+        <div class="biz-mini-box">
+          <div class="biz-mini-title">輸出市場</div>
+          <div class="biz-mini-text">
             北米·欧州·中国·アジア<br>
-            各国の品質基準·規格に対応
+            各国の品質基準·規格対応
           </div>
         </div>
         <img src="kaicheng_images/img_11.jpg" class="biz-team-img" alt="チーム">
       </div>
     </div>
 
-    <div style="margin-top: 5px; font-size: 7px; color: rgba(255,255,255,0.7); text-align: center; background: var(--blue); padding: 4px; border-radius: 3px;">
-      ご質問·お見積もりは、お気軽にお問い合わせください
-    </div>
+    <div class="biz-cta">ご質問·お見積もりは、お気軽にお問い合わせください</div>
   </div>
 
-  <!-- [6] 右下角封底 -->
+  <!-- ============================================================
+       PANEL 6: BACK COVER (right bottom)
+       ============================================================ -->
   <div class="panel p-back">
-    <div class="red-accent-bar"></div>
-    <div class="back-title-jp">凱成機械製造有限公司</div>
-    <div class="back-title-en">SHENYANG KAICHENG MFG. CO., LTD.</div>
-    <div class="back-divider"></div>
-    <div class="back-contact">
-      <div class="back-contact-item">
-        <div class="back-contact-icon">📞</div>
-        <div class="back-contact-text">024-87698655 / 13958251107</div>
-      </div>
-      <div class="back-contact-item">
-        <div class="back-contact-icon">✉️</div>
-        <div class="back-contact-text">xk_casting@163.com</div>
-      </div>
-      <div class="back-contact-item">
-        <div class="back-contact-icon">📍</div>
-        <div class="back-contact-text">沈阳市新民市陶家屯镇南窑村</div>
-      </div>
-      <div class="back-contact-item">
-        <div class="back-contact-icon">🌐</div>
-        <div class="back-contact-text">sykcjxzz.com</div>
+    <div class="back-topbar"></div>
+    <div>
+      <div class="back-title-jp">凱成機械製造有限公司</div>
+      <div class="back-title-en">SHENYANG KAICHENG MFG. CO., LTD.</div>
+      <div class="back-divider"></div>
+      <div class="back-contact">
+        <div class="back-contact-item">
+          <div class="back-contact-icon">📞</div>
+          <div class="back-contact-text">024-87698655 / 13958251107</div>
+        </div>
+        <div class="back-contact-item">
+          <div class="back-contact-icon">✉️</div>
+          <div class="back-contact-text">xk_casting@163.com</div>
+        </div>
+        <div class="back-contact-item">
+          <div class="back-contact-icon">📍</div>
+          <div class="back-contact-text">沈阳市新民市陶家屯镇南窑村</div>
+        </div>
+        <div class="back-contact-item">
+          <div class="back-contact-icon">🌐</div>
+          <div class="back-contact-text">sykcjxzz.com</div>
+        </div>
       </div>
     </div>
-    <div class="back-cta">お問い合わせ · お見積もり大歓迎</div>
-    <div class="back-footer">© 2026 SHENYANG KAICHENG MFG. ALL RIGHTS RESERVED.</div>
+    <div>
+      <div class="back-cta">お問い合わせ · お見積もり大歓迎</div>
+      <div class="back-footer">© 2026 SHENYANG KAICHENG MFG. ALL RIGHTS RESERVED.</div>
+    </div>
   </div>
 
 </div><!-- end brochure -->
+</div><!-- end wrapper -->
+
+<!-- ============================================================
+     PRINT SPECIFICATIONS
+     ============================================================ -->
+<div class="print-specs">
+  <h2>📋 印刷规格说明书 — 凱成機械製造 会社案内（三折页）</h2>
+  <table class="spec-table">
+    <thead><tr><th>项目</th><th>规格</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td><strong>成品尺寸</strong></td><td>A4 竖版（210 × 297mm）</td><td>三折页：折叠后每格 99mm × 210mm</td></tr>
+      <tr><td><strong>展开总宽</strong></td><td>297mm</td><td>三等分，每格 99mm</td></tr>
+      <tr><td><strong>总高度</strong></td><td>210mm</td><td>上下两排，每格 105mm</td></tr>
+      <tr><td><strong>出血线</strong></td><td>每边各 3mm</td><td>印刷用尺寸 303mm × 216mm</td></tr>
+      <tr><td><strong>纸张</strong></td><td>157g/m² 铜版纸（单张整版）</td><td>覆哑膜质感最佳</td></tr>
+      <tr><td><strong>印刷色</strong></td><td>CMYK 4色</td><td>Japan Color 2001 Coated</td></tr>
+      <tr><td><strong>折叠方式</strong></td><td>竖三折（先折中间，再折左右）</td><td>建议印刷厂按此顺序折叠打样</td></tr>
+      <tr><td><strong>分辨率</strong></td><td>300 dpi</td><td>图片需原尺寸高清</td></tr>
+      <tr><td><strong>交付格式</strong></td><td>PDF/X-4（印刷版）</td><td>送印前务必转 PDF</td></tr>
+    </tbody>
+  </table>
+  <div class="spec-note">
+    <strong>⚠️ 注意：</strong>三折页折叠顺序影响阅读流畅度，建议先打样确认。折痕建议压在内容分区线上，实际成品会更整洁美观。
+  </div>
+</div>
 
 </body>
 </html>
